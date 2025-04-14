@@ -1,0 +1,63 @@
+version: '3.5'
+
+services:
+  ebook:
+    image: ebook
+    build: .
+    container_name: ebook
+    hostname: ebook
+    restart: always
+    ports:
+      - 5012:5000
+    volumes:
+      - ./ebook:/servicos
+    command: python3 /servicos/servicos.py
+    networks:
+      - ebook
+    
+  estoque:
+    image: estoque
+    build: .
+    container_name: estoque
+    hostname: estoque
+    restart: always
+    ports:
+      - 5013:5000
+    volumes:
+      - ./estoque:/servicos
+    command: python3 /servicos/servicos.py
+    networks:
+      - ebook
+
+  pagamento:
+    image: pagamento
+    build: .
+    container_name: pagamento
+    hostname: pagamento
+    restart: always
+    ports:
+      - 5014:5000
+    volumes:
+      - ./pagamento:/servicos
+    command: python3 /servicos/servicos.py
+    networks:
+      - ebook
+
+  # remessa:
+  #   image: remessa
+  #   build: .
+  #   container_name: remessa
+  #   hostname: remessa
+  #   restart: always
+  #   ports:
+  #     - 5015:5000
+  #   volumes:
+  #     - ./remessa:/servicos
+  #   command: python3 /servicos/servicos.py
+  #   networks:
+  #     - ebook
+
+networks:
+  ebook:
+    external:
+      name: venda
