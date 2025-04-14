@@ -1,0 +1,62 @@
+version: '3.1'
+
+services:
+  foods:
+    build: .
+    image: fastfood
+    container_name: products
+    hostname: products
+    restart: always
+    volumes:
+      - ./services/products:/services
+    command: python3 /services/products.py
+    ports:
+      - 5001:5000
+
+  orders:
+    build: .
+    image: fastfood
+    container_name: orders
+    hostname: orders
+    restart: always
+    volumes:
+      - ./services/orders:/services
+    command: python3 /services/orders.py
+    ports:
+      - 5002:5000
+
+  cart:
+    build: .
+    image: fastfood
+    container_name: cart
+    hostname: cart
+    restart: always
+    volumes:
+      - ./services/cart:/services
+    command: python3 /services/cart.py
+    ports:
+      - 5003:5000
+
+  bd_foods:
+    image: memcached
+    container_name: db_foods
+    hostname: db_foods
+    restart: always
+    ports: 
+      - 5101:11211
+  
+  db_orders:
+    image: memcached
+    container_name: db_orders
+    hostname: db_orders
+    restart: always
+    ports: 
+      - 5102:11211
+
+  db_cart:
+    image: memcached
+    container_name: db_cart
+    hostname: db_cart
+    restart: always
+    ports: 
+      - 5103:11211

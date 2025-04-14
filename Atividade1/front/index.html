@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrinho de Compras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #333;
+      color: white;
+    }
+
+    tfoot td {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .cliente {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Carrinho de Compras</h1>
+  <div class="cliente" id="clienteInfo"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Qtd</th>
+        <th>Valor Unitário (R$)</th>
+        <th>Subtotal (R$)</th>
+      </tr>
+    </thead>
+    <tbody id="carrinhoBody">      
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">Total</td>
+        <td id="valorTotal"></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <script>    
+    const endpointCarrinho = "http://localhost:5003/cart";
+    console.log(endpointCarrinho);
+    
+    fetch(endpointCarrinho)
+      .then(response => response.json())
+      .then(carrinho => {
+        document.getElementById("clienteInfo").textContent = `Cliente: ${carrinho.cliente}`;
+        const tbody = document.getElementById("carrinhoBody");
+        carrinho.carrinho.forEach(produto => {
+          const tr = document.createElement("tr");
+
+          tr.innerHTML = `
+            <td>${produto.nome}</td>
+            <td>${produto.quantidade}</td>
+            <td>${produto.valorUnitario.toFixed(2)}</td>
+            <td>${produto.subtotal.toFixed(2)}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        document.getElementById("valorTotal").textContent = carrinho.valorTotal.toFixed(2);
+      })
+      .catch(error => {
+        console.error("Erro ao carregar carrinho:", error);
+        document.body.innerHTML += "<p>Erro ao carregar dados do carrinho.</p>";
+      });
+  </script>
+
+</body>
+</html>

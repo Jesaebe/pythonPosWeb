@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "nome": "X-Burguer",
+      "valor": 15.90,
+      "ingredientes": ["pão", "hambúrguer bovino", "queijo", "alface", "tomate", "maionese"]
+    },
+    {
+      "id": 2,
+      "nome": "X-Salada",
+      "valor": 17.50,
+      "ingredientes": ["pão", "hambúrguer bovino", "queijo", "alface", "tomate", "cebola", "maionese"]
+    },
+    {
+      "id": 3,
+      "nome": "X-Bacon",
+      "valor": 19.90,
+      "ingredientes": ["pão", "hambúrguer bovino", "bacon", "queijo", "alface", "maionese"]
+    },
+    {
+      "id": 4,
+      "nome": "Cheddar Burguer",
+      "valor": 21.00,
+      "ingredientes": ["pão australiano", "hambúrguer bovino", "cheddar cremoso", "cebola caramelizada"]
+    },
+    {
+      "id": 5,
+      "nome": "Vegetariano",
+      "valor": 18.00,
+      "ingredientes": ["pão integral", "hambúrguer de grão-de-bico", "alface", "tomate", "cebola roxa", "maionese vegana"]
+    },
+    {
+      "id": 6,
+      "nome": "Batata Frita",
+      "valor": 10.00,
+      "ingredientes": ["batata", "sal"]
+    },
+    {
+      "id": 7,
+      "nome": "Refrigerante Lata",
+      "valor": 6.00,
+      "ingredientes": ["bebida gaseificada", "açúcar", "aromatizantes"]
+    },
+    {
+      "id": 8,
+      "nome": "Milkshake de Chocolate",
+      "valor": 12.00,
+      "ingredientes": ["sorvete de chocolate", "leite", "chantilly"]
+    }
+  ]
+}

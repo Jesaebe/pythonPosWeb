@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lanchonete Delícia</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff8f0;
+      color: #333;
+    }
+
+    header {
+      background-color: #c62828;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      border-bottom: 2px solid #c62828;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card strong {
+      color: #c62828;
+    }
+
+    .erro {
+      background: #fff3cd;
+      border-left: 6px solid #ffa000;
+      padding: 15px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>Lanchonete POSWEB2024.2</header>
+  <div class="container">
+
+    <div id="erro" class="erro" style="display: none;">
+      Alguns serviços do sistemas estão em manutenção. Por favor, volte mais tarde. 🍔🔧
+    </div>
+
+    <section>
+      <h2>🍔 Produtos</h2>
+      <div id="produtos"></div>
+      <div id="erroProdutos" class="erro" style="display: none;">
+        Serviços em manutenção. Por favor, volte mais tarde. 🍔🔧
+      </div>
+    </section>
+
+    <section>
+      <h2>📦 Pedidos</h2>
+      <div id="pedidos"></div>
+      <div id="erroPedidos" class="erro" style="display: none;">
+        Serviços em manutenção. Por favor, volte mais tarde. 🍔🔧
+      </div>
+    </section>
+
+    <section>
+      <h2>🛒 Carrinho</h2>
+      <div id="carrinho"></div>
+      <div id="erroCarrinho" class="erro" style="display: none;">
+        Serviços em manutenção. Por favor, volte mais tarde. 🍔🔧
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const exibirErro = () => {
+      document.getElementById('erro').style.display = 'block';
+    }
+
+    const exibirProdutos = () => {
+      document.getElementById('erroProdutos').style.display = 'block';
+      const prodDiv = document.getElementById('produtos');
+      prodDiv.innerHTML = "";
+    }
+
+    const exibirPedidos = () => {
+      document.getElementById('erroPedidos').style.display = 'block';
+      const pedDiv = document.getElementById('produtos');
+      pedDiv.innerHTML = "";
+    }
+
+    const exibirCarrinho = () => {
+      document.getElementById('erroCarrinho').style.display = 'block';
+      const carDiv = document.getElementById('produtos');
+      carDiv.innerHTML = "";
+    }
+
+    const carregarDados = async () => {
+      document.getElementById('erro').style.display = 'none';
+      try {
+        const endpoint = 'http://localhost:5001/foods';
+        console.log(`Consumindo o endpoint: ${endpoint}`);
+        const resProdutos = await fetch(endpoint);
+        if (!resProdutos.ok) throw new Error('Erro ao buscar produtos');
+
+        const endpointAlive = 'http://localhost:5001/alive';
+        const resAlive = await fetch(endpointAlive);
+        const alive = await resAlive.text();
+        console.log(`Consumindo o endpoint: ${endpointAlive} | ${alive}`);        
+        document.getElementById('erroProdutos').style.display = 'none';
+        if (alive !== 'YES') throw new RegExp('Serviço em manutenção');
+
+        const produtos = await resProdutos.json();
+        const prodDiv = document.getElementById('produtos');
+        prodDiv.innerHTML = "";
+        produtos.forEach(p => {
+          prodDiv.innerHTML += `
+            <div class="card">
+              <strong>${p.nome}</strong><br/>
+              R$ ${p.valor.toFixed(2)}<br/>
+              <em>Ingredientes:</em> ${p.ingredientes.join(', ')}
+            </div>
+          `;
+        });
+      } catch (err) {
+        console.error(err);
+        exibirErro();
+        exibirProdutos();
+      }
+
+      try {
+        const endpoint = 'http://localhost:5002/orders';
+        console.log(`Consumindo o endpoint: ${endpoint}`);
+        const resPedidos = await fetch(endpoint);
+        if (!resPedidos.ok) throw new Error('Erro ao buscar pedidos');
+        
+        const endpointAlive = 'http://localhost:5002/alive';
+        const resAlive = await fetch(endpointAlive);
+        const alive = await resAlive.text();
+        console.log(`Consumindo o endpoint: ${endpointAlive} | ${alive}`);        
+        document.getElementById('erroPedidos').style.display = 'none';
+        if (alive !== 'YES') throw new RegExp('Serviço em manutenção');
+
+        const pedidos = await resPedidos.json();
+        const pedDiv = document.getElementById('pedidos');
+        pedDiv.innerHTML = "";
+        pedidos.forEach(p => {
+          pedDiv.innerHTML += `
+            <div class="card">
+              <strong>Pedido: </strong> # ${p.id}<br/>
+              <strong>Cliente:</strong> ${p.nomeCliente}<br/>
+              <strong>Endereço:</strong> ${p.endereco}<br/>
+              <strong>Status:</strong> ${p.statusAtendimento}<br/>
+              <strong>Data:</strong> ${p.dataPedido}<br/>
+              <strong>Total:</strong> R$ ${p.valorTotal.toFixed(2)}<br/>
+              <strong><em>Itens:</em></strong>
+              <ul>
+                ${p.produtos.map(item => `<li>${item.nome} - R$ ${item.valor.toFixed(2)}</li>`).join('')}
+              </ul>
+            </div>
+          `;
+        });
+      } catch (err) {
+        console.error(err);        
+        exibirErro();
+        exibirPedidos();
+      } 
+
+      try {
+        const endpoint = 'http://localhost:5003/cart';
+        console.log(`Consumindo o endpoint: ${endpoint}`);
+        const resCarrinho = await fetch(endpoint);
+        if (!resCarrinho.ok) throw new Error('Erro ao buscar carrinho');
+
+        const endpointAlive = 'http://localhost:5003/alive';
+        const resAlive = await fetch(endpointAlive);
+        const alive = await resAlive.text();
+        console.log(`Consumindo o endpoint: ${endpointAlive} | ${alive}`);        
+        document.getElementById('erroCarrinho').style.display = 'none';
+        if (alive !== 'YES') throw new RegExp('Serviço em manutenção');
+
+        const carrinho = await resCarrinho.json();
+        const carDiv = document.getElementById('carrinho');        
+        carDiv.innerHTML = `
+          <div class="card">
+            <strong>Cliente:</strong> ${carrinho.cliente}<br/>
+            <strong>Total:</strong> R$ ${carrinho.valorTotal.toFixed(2)}<br/>
+            <em>Itens no carrinho:</em>
+            <ul>
+              ${carrinho.carrinho.map(item => `<li>${item.nome} (${item.quantidade}x) - R$ ${item.subtotal.toFixed(2)}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+
+      } catch (err) {
+        console.error(err);        
+        exibirErro();
+        exibirCarrinho();
+      } 
+    }
+
+    window.onload = () => {
+      carregarDados();      
+      setInterval(carregarDados, 5000);
+    };
+  </script>
+</body>
+</html>

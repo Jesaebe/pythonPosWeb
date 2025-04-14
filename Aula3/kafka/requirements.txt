@@ -1,0 +1,5 @@
+#COMMAND TO INSTALL
+# pip3 install -r requirements.txt
+
+kafka-python
+Faker

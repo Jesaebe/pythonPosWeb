@@ -1,0 +1,174 @@
+{
+  "orders": [
+    {
+      "id": 101,
+      "nomeCliente": "Mariana Souza",
+      "endereco": "Rua das Flores, 123 - Centro",
+      "valorTotal": 41.80,
+      "dataPedido": "2025-04-11T12:45:00",
+      "statusAtendimento": "Em preparo",
+      "produtos": [
+        {
+          "id": 1,
+          "nome": "X-Burguer",
+          "valor": 15.90
+        },
+        {
+          "id": 4,
+          "nome": "Cheddar Burguer",
+          "valor": 21.00
+        },
+        {
+          "id": 7,
+          "nome": "Refrigerante Lata",
+          "valor": 4.90
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "nomeCliente": "Carlos Lima",
+      "endereco": "Av. Brasil, 456 - Bairro Novo",
+      "valorTotal": 28.00,
+      "dataPedido": "2025-04-11T13:10:00",
+      "statusAtendimento": "Entregue",
+      "produtos": [
+        {
+          "id": 2,
+          "nome": "X-Salada",
+          "valor": 17.50
+        },
+        {
+          "id": 6,
+          "nome": "Batata Frita",
+          "valor": 10.50
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "nomeCliente": "Juliana Ferreira",
+      "endereco": "Rua das Palmeiras, 98 - Jardim América",
+      "valorTotal": 30.00,
+      "dataPedido": "2025-04-11T13:30:00",
+      "statusAtendimento": "Aguardando pagamento",
+      "produtos": [
+        {
+          "id": 5,
+          "nome": "Vegetariano",
+          "valor": 18.00
+        },
+        {
+          "id": 8,
+          "nome": "Milkshake de Chocolate",
+          "valor": 12.00
+        }
+      ]
+    },    
+    {
+      "id": 104,
+      "nomeCliente": "Rafael Mendes",
+      "endereco": "Rua do Comércio, 789 - Centro",
+      "valorTotal": 33.90,
+      "dataPedido": "2025-04-11T14:00:00",
+      "statusAtendimento": "Em entrega",
+      "produtos": [
+        {
+          "id": 3,
+          "nome": "X-Bacon",
+          "valor": 19.90
+        },
+        {
+          "id": 7,
+          "nome": "Refrigerante Lata",
+          "valor": 6.00
+        },
+        {
+          "id": 6,
+          "nome": "Batata Frita",
+          "valor": 8.00
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "nomeCliente": "Beatriz Nunes",
+      "endereco": "Av. Santos Dumont, 321 - Zona Sul",
+      "valorTotal": 15.90,
+      "dataPedido": "2025-04-11T14:15:00",
+      "statusAtendimento": "Recebido",
+      "produtos": [
+        {
+          "id": 1,
+          "nome": "X-Burguer",
+          "valor": 15.90
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "nomeCliente": "Lucas Silva",
+      "endereco": "Rua do Sol, 222 - Vila Nova",
+      "valorTotal": 39.00,
+      "dataPedido": "2025-04-11T14:25:00",
+      "statusAtendimento": "Em preparo",
+      "produtos": [
+        {
+          "id": 4,
+          "nome": "Cheddar Burguer",
+          "valor": 21.00
+        },
+        {
+          "id": 8,
+          "nome": "Milkshake de Chocolate",
+          "valor": 12.00
+        },
+        {
+          "id": 7,
+          "nome": "Refrigerante Lata",
+          "valor": 6.00
+        }
+      ]
+    },
+    {
+      "id": 107,
+      "nomeCliente": "Fernanda Oliveira",
+      "endereco": "Travessa Esperança, 55 - Jardim Bela Vista",
+      "valorTotal": 27.90,
+      "dataPedido": "2025-04-11T14:45:00",
+      "statusAtendimento": "Cancelado",
+      "produtos": [
+        {
+          "id": 2,
+          "nome": "X-Salada",
+          "valor": 17.50
+        },
+        {
+          "id": 6,
+          "nome": "Batata Frita",
+          "valor": 10.40
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "nomeCliente": "Eduardo Costa",
+      "endereco": "Rua das Laranjeiras, 67 - Bairro Alto",
+      "valorTotal": 24.00,
+      "dataPedido": "2025-04-11T15:00:00",
+      "statusAtendimento": "Entregue",
+      "produtos": [
+        {
+          "id": 5,
+          "nome": "Vegetariano",
+          "valor": 18.00
+        },
+        {
+          "id": 7,
+          "nome": "Refrigerante Lata",
+          "valor": 6.00
+        }
+      ]
+    }
+  ]  
+}

@@ -1,0 +1,29 @@
+{
+  "cart": {
+    "cliente": "Mariana Souza",
+    "carrinho": [
+      {
+        "id": 3,
+        "nome": "X-Bacon",
+        "quantidade": 2,
+        "valorUnitario": 19.90,
+        "subtotal": 39.80
+      },
+      {
+        "id": 6,
+        "nome": "Batata Frita",
+        "quantidade": 1,
+        "valorUnitario": 10.00,
+        "subtotal": 10.00
+      },
+      {
+        "id": 8,
+        "nome": "Milkshake de Chocolate",
+        "quantidade": 1,
+        "valorUnitario": 12.00,
+        "subtotal": 12.00
+      }
+    ],
+    "valorTotal": 61.80
+  }  
+}
